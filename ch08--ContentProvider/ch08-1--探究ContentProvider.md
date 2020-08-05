@@ -1,10 +1,10 @@
-## 探究ContentProvider
+# 探究ContentProvider
 
 #### 1.运行时的权限
 
- 在android6.0 之后加入运行时权限，android100多权限共有30个危险权限，需要运行时权限处理，就是在使用到该权限是用户进行选择。运行时权限不仅需要在androidmani.xml 中注册还需要在代码中体现。
+​       在android6.0 之后加入运行时权限，android100多权限共有30个危险权限，需要运行时权限处理，就是在使用到该权限是用户进行选择。运行时权限不仅需要在androidmani.xml 中注册还需要在代码中体现。
 
-先是需要判断是否授权，确保第二次使用时不需要再次判断。
+​       先是需要判断是否授权，确保第二次使用时不需要再次判断。
 
 ```kotlin
    make_call.setOnClickListener {
@@ -49,44 +49,44 @@ private fun call() {
 ```
 #### 2.访问其他程序的数据   ContentResolver
 
-使用了内容URl
+   使用了内容URl
 
 比如读取联系人的姓名和手机号，需要使用运行时权限，不仅需要在androidmina.xml 中注册权限还需要在代码中体现。
 
-在Activity中调用
+   在Activity中调用
 
 ```kotlin
 contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null)?.apply {
 
-​            //通过移动游标来遍历Cursor的所有行，取出每一列中相应行的数据
+            //通过移动游标来遍历Cursor的所有行，取出每一列中相应行的数据
 
-​            while (moveToNext()) {
+            while (moveToNext()) {
 
-​               //获取联系人姓名
+               //获取联系人姓名
 
-​               val displayname = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+               val displayname = getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
 
-​                //获取联系人号码
+                //获取联系人号码
 
-​                val number =  getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val number =  getString(getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
 
-​                contactsList.add("$displayname\n$number")
+                contactsList.add("$displayname\n$number")
 
-​            }
+            }
 
-​            //刷新一下ListView
+           //刷新一下ListView
 
-​            adapter.notifyDataSetChanged()
+            adapter.notifyDataSetChanged()
 
-​            //将Cursor对象关闭
+            //将Cursor对象关闭
 
-​            close()
+            close()
 ```
 
 #### 3.创建自己的ContentProvider
 
 创建之后可以供其他程序通过ContentResolver来查询到程序的数据，
 
-创建MyProvity类
+创建MyProvity类 链接：https://blog.csdn.net/weixin_38244174/article/details/106254237
 
-需要重写oncreate() insert() query() delete() update()  gettype()  方法
+注意：需要重写oncreate() insert() query() delete() update()  gettype()  方法

@@ -1,4 +1,4 @@
-### Fragment
+# Fragment的用法
 
 #### 简单用法
 
@@ -79,10 +79,13 @@ fun replaceFragment(fragment:Fragment){
 ```
 #### Fragment与Activity之间的交互
 
-​	**Activity获取Fragment的实例**
+##### 	1、Activity获取Fragment的实例
+
 ​		 val fragment = supportFragmentManager.findFragmentById(R.id.left_frag) as LeftFragment
 ​		  val fragment = left_frag as LeftFragment 
-​	**Fragment获取Activity的实例**
+
+##### 	2、Fragment获取Activity的实例
+
 ​		getActivity
 
 ```kotlin
@@ -94,7 +97,8 @@ fun replaceFragment(fragment:Fragment){
 ```
 #### Fragment的生命周期
 
-​	**四种状态**
+##### 	四种状态
+
 ​		1.运行状态
 ​			Fragment相关联的Activity运行
 ​		2.暂停状态
@@ -103,7 +107,9 @@ fun replaceFragment(fragment:Fragment){
 ​			Activity停止或者FragmentTransaction的remove和replace移除被调用，但在此之间调用了addToBackStack方法
 ​		4.销毁状态
 ​			Activity被销毁或者FragmentTransaction的remove和replace移除被调用。未调用addToBackStack方法
-​	**回调方法**
+
+##### 	回调方法
+
 ​		1.onAttach()
 ​			Fragment与Activity()建立联系时
 ​		2.onCreateView()

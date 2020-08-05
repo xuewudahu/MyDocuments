@@ -1,20 +1,18 @@
-### UI开发入门
+# UI开发入门
 
 #### **常用的控件**
 
-​	**TextView**
+​	1、TextView
 ​		match_parent ->当前控件大小与父布局相同    android:gravity->指明文字对齐方式
-​	**Button**
-​		Android默认将英文字母转换成大写，android:textAllCaps设置为false保留指定原始文件内容
-​	**EditText**
+	2、Button
+		Android默认将英文字母转换成大写，android:textAllCaps设置为false保留指定原始文件内容
+	3、EditText
 ​		输入和编辑文本  Android：hint->提示性文本  Android：maxLInes ->最大行数
 
 获取文本的内容方式：id名.text.toString 
 
-​	**ImageView**
-​		图片通常放在Drawable开头的目录中，并附上分辨率，图片的命名必须以字母开头
-
- 	
+​	4、ImageView
+		图片通常放在Drawable开头的目录中，并附上分辨率，图片的命名必须以字母开头
 
 ```kotlin
  imageView.setOnClickListener{
@@ -25,8 +23,9 @@
 
 ​        可以在activity中替换图片	
 
-**PrograssBar**
-		进度条 Android：max -> 给进度条的最大值
+##### **PrograssBar**
+
+​		进度条 Android：max -> 给进度条的最大值
 
 ```kotlin
         //android:visibility有三个可选值：visiable（控件可见，默认）、invisible（空间不可见，仍占据原来未知）
@@ -45,26 +44,26 @@
             progress_bar01.progress += 10
         }
 ```
-​	**AlertDialog**
+​	AlertDialog
 ​		对话框，屏蔽所有控件的交互
 
 #### 基本布局
 
-​	**LinearLayout**
+​	1、LinearLayout
 ​		线性布局 Android：orientation=“horiziontal”时（默认值）只有垂直方向的对齐方式可以改变
 
 ​        Android：gravity-> 文字的对齐方式
 ​        Android：layout_gravity -> 布局对齐方式
 
-​	**RelativeLayout**
+​	2、RelativeLayout
 ​		相对定位方式
-​	**FrameLayout**
+	3、FrameLayout
 ​		帧布局
 ​			所有的控件都是在布局的左上角
 
 #### 自定义布局
 
-​	**没有相应事件时**
+​	1、没有相应事件时
 ​		先在title.xml 中制作一个布局然后在activity.xml中引入title布局
 
 ```kotlin
@@ -77,7 +76,7 @@ android:layout_height="match_parent">
  
 </LinearLayout>
 ```
-​	**有相应事件时**
+​	2、有相应事件时
 ​		有title.xml 和 TitleLayout类 （继承LinearLayout类）在类中书写相应事件，在Activity_main.xml中引入TitleLayout类
 
 ```kotlin

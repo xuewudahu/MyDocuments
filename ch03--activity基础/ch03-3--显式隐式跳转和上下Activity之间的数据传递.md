@@ -1,6 +1,8 @@
-### 在activity中来回穿梭
+# Activity的跳转和数据传递
 
-1、显示Intent  
+#### 在activity中来回穿梭
+
+##### 1、显示Intent  
 
 *在activity中的组件代码*
 
@@ -11,7 +13,7 @@ button2.setOnClickListener{
 }
 ```
 
-2、隐式Intent
+##### 2、隐式Intent
 
 *需要在AndroidManifest.xml中配置*
 
@@ -36,7 +38,7 @@ button3.setOnClickListener{
 
 ####  数据传递
 
-**1、向下一个Activity传递数据**
+##### **1、向下一个Activity传递数据**
 
 按钮点击事件的代码
 
@@ -49,7 +51,7 @@ button3.setOnClickListener{
         startActivity(intent)
     }
 ```
-第二个activity如何接收的代码
+##### 第二个activity如何接收的代码
 
 
 ```kotlin
@@ -64,7 +66,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 }
 
-**2、向上一个Activity传递数据**
+##### **2、向上一个Activity传递数据**
 
 在第一个Activity中接收下一个Activity发送过来的数据
 
@@ -95,6 +97,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ```kotlin
+//  那么如果用户不是通过点击事件返回，而是点击Back键回到第一个Activity，如何处理？通过在第二个Activity中重写onBackPressed方法来解决这个问题。
 override fun onBackPressed() {
     val intent = Intent()
     intent.putExtra("data_return", "Hello FirstActivity")

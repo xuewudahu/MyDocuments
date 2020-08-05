@@ -1,49 +1,58 @@
-kotlin基础（第五章）
+### kotlin基础知识（第四章）
 
-**扩展函数**
-
-可以在不修改类的源码的情况下添加函数（方法）
-
-使用ClassName.的方式来定义。可以放在同类名的文件夹中，便于以后的查找。
-
-比如在String.kt文件中
+##### 延迟初始化
 
 ```kotlin
-fun String.lettersCount(): Int{
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+private lateinit var adapter: MsgAdapter
 
-   var count=0
+override fun onCreate(savedInstanceState: Bundle?) {
+...
+        adapter = MsgAdapter(msgList)
+....
+}
 
-   for(char in this){
-
-   if(char.isletter()){
-
-        count++
-
-      }
-
+override fun onClick(v: View?) {
+...
+                adapter.notifyItemInserted(msgList.size - 1) 
+...
+                }
+            }
+        }
     }
-
-    return count
-
-}
 ```
 
-**运算符重载**
+adapter就使用了lateinit修饰变成了延迟初始化，可以不赋初值
 
-像+   -   *   \   ++  %  >   <  in  .. 等运算符和关键字可以重载，在使用该关键字的类中重载，需要添加operator
+使用adapter的方法时也不需要使用？.来调用
+
+使用了lateinit就确定在调用方法之前一定会赋值
+
+
+
+##### 密封类
 
 ```kotlin
-class Money(val value: Int ){
-  operator fun plus(money:Money):Money{
-       val sum=value+money.value
-       return Money(sum)
-   }
-  operator fun plus(newValue:In):Money{
-      val sum=value+newValue
-      return Money(sum)
+sealed class Result
+
+class Success(val msg: String) : Result()
+
+class Failure(val error: Exception) : Result()
+
+fun getResultMsg(result: Result) = when (result) {
+    is Success -> result.msg
+    is Failure -> "Error is ${result.error.message}"
+}
+fun main() {
+     val s=Success("3")
+    val e=Failure(java.lang.RuntimeException)
+    println(getResultMsg(s))
+    println(getResultMsg(e))
 }
 ```
 
-Money对象就可以使用+来运算
+使用了sealed class修饰Result 变成了一个可继承的类（密封类）
 
-也可以使用Money和数字使用+运算符
+成为密封类后使用when判断是可以不用else，否则会报错
+
+但是又有一个类继承此密封类，在when中就必须添加条件分支，否则会报错。

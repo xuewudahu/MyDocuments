@@ -1,10 +1,8 @@
+# 探究Service
 
+#### 1、新建Service，new->Service->Service  自动在Androidmanifest.xml中注册
 
-
-
-## 探究Service
-
-##### 1、新建Service，new->Service->Service  自动在Androidmanifest.xml中注册
+创建service
 
 ```kotlin
 public class MyService extends Service {
@@ -31,7 +29,9 @@ public class MyService extends Service {
 }
 ```
 
-##### 2、启动和停止service
+
+
+#### 2、启动和停止service
 
 使用intent。启动：val intent =Intent (this,MyService:class.java)   startService(intent)
 
@@ -41,52 +41,7 @@ Android8.0以后，只有当应用保持在前台可见状态下，Service才能
 
 
 
-##### 3、Activity和Service进行通信
-
-Activity和Service
-
-
-
-## 探究Service
-
-##### 1、新建Service，new->Service->Service  自动在Androidmanifest.xml中注册
-
-```kotlin
-public class MyService extends Service {
-    public MyService() {
-    }
-    @Override
-    public IBinder onBind(Intent intent) {
-}
-//服务创建时调用
-    @Override
-    public void onCreate() {
-        super.onCreate();
-}
-//每次服务启动时调用
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-      return super.onStartCommand(intent, flags, startId);
-}
-//服务销毁时调用
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-}
-```
-
-##### 2、启动和停止service
-
-使用intent。启动：val intent =Intent (this,MyService:class.java)   startService(intent)
-
-停止：val intent =Intent (this,MyService:class.java)   stopService(intent)
-
-Android8.0以后，只有当应用保持在前台可见状态下，Service才能稳定运行，一旦进入后台随时可能被回收。
-
-
-
-##### 3、Activity和Service进行通信
+#### 3、Activity和Service进行通信
 
 在Service中Activity和Service的通信主要依赖onBind()方法
 
@@ -100,7 +55,9 @@ Android8.0以后，只有当应用保持在前台可见状态下，Service才能
 
 解绑Service                           unbindService（connection）
 
-##### 4、Service的生命周期
+
+
+#### 4、Service的生命周期
 
 ​    调用startService()方法，Service方法就会调用，回调到onStartCommand()方法，如果Service没有创建就会先回调到onCreate()然后回调onStartCommand()方法，直到被stopService()或者stopSelf()方法调用或者是被系统回收。
 
@@ -108,7 +65,9 @@ Android8.0以后，只有当应用保持在前台可见状态下，Service才能
 
 startService()和bindService()都启动了，要各个结束。
 
-##### 5、使用前台Service
+
+
+#### 5、使用前台Service
 
 ```kotlin
 override fun onCreate() {
@@ -133,7 +92,9 @@ override fun onCreate() {
 }
 ```
 
-6、使用IntentService
+
+
+#### 6、使用IntentService
 
 ```kotlin
 class MyIntentService : IntentService("MyIntentService") {
